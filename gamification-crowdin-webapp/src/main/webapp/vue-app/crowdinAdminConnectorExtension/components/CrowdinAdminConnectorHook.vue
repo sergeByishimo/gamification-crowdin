@@ -151,7 +151,7 @@ export default {
     },
     deleteHook() {
       return this.$crowdinConnectorService.deleteCrowdinWebHook(this.projectId).then(() => {
-        this.$root.$emit('crowdin-hooks-updated');
+        this.$emit('hooksUpdated');
       });
     },
     editCrowdinWebHook(event) {

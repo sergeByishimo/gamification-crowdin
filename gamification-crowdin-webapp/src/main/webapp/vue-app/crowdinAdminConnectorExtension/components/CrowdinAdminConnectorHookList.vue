@@ -59,7 +59,8 @@
       :key="hook.name">
       <crowdin-admin-connector-hook
         class="full-height"
-        :hook="hook" />
+        :hook="hook"
+        @hooksUpdated="refreshHooks" />
     </div>
     <template v-if="hasMore">
       <v-btn

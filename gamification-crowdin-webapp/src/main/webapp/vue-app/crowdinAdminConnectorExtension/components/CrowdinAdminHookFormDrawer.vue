@@ -237,14 +237,14 @@ export default {
         // Get project object from projects using projectId
         const project = this.projects.find(p => p.id === this.projectId);
         return this.$crowdinConnectorService.saveCrowdinWebHook(project, this.accessToken).then(() => {
-          this.$root.$emit('crowdin-hooks-updated');
+          this.$emit('hooksUpdated');
           this.close();
         }).catch(error => {
           this.displayNotificationAlert(error.message, 'error');
         }).finally(() => this.loading = false);
       } else {
         return this.$crowdinConnectorService.updateWebHookAccessToken(this.hookId, this.accessToken).then(() => {
-          this.$root.$emit('crowdin-hooks-updated');
+          this.$emit('hooksUpdated');
           this.close();
         }).finally(() => this.loading = false);
       }

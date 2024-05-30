@@ -116,13 +116,13 @@
           </v-btn>
         </div>
       </template>
-      <crowdin-admin-connector-hook-list @updated="webhooksUpdated" />
+      <crowdin-admin-connector-hook-list ref="crowdinHookList" @updated="webhooksUpdated" />
     </template>
     <crowdin-admin-connector-hook-detail
       v-else
       :hook="selectedHook"
       @close="displayHookDetail = false" />
-    <crowdin-admin-hook-form-drawer />
+    <crowdin-admin-hook-form-drawer @hooksUpdated="refreshHooks" />
     <crowdin-admin-connection-setting-drawer ref="connectionSettingDrawer" />
     <exo-confirm-dialog
       ref="deleteConfirmDialog"
@@ -243,6 +243,9 @@ export default {
     },
     forceUpdateWebhooks() {
       this.$root.$emit('crowdin-hooks-force-updated');
+    },
+    refreshHooks() {
+      this.$refs.crowdinHookList.refreshHooks(false);
     },
     webhooksUpdated(webhooks){
       this.webhooks = webhooks;

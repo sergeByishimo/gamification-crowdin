@@ -85,14 +85,14 @@ export function saveCrowdinWebHook(project, accessToken) {
     },
     body: new URLSearchParams(formData).toString(),
   }).then(resp => {
-    if (!resp?.ok) {
-      if (resp.status === 404 || resp.status === 401) {
-        return resp.json().then((data) => {
-          throw new Error(data.message);
-        });
-      } else {
-        throw new Error('Error when saving crowdin webhook');
-      }
+    if (resp && resp.ok) {
+      return resp.json;
+    } else if (resp.status === 404 || resp.status === 401) {
+      return resp.json().then((data) => {
+        throw new Error(data.message);
+      });
+    } else {
+      throw new Error('Error when saving crowdin webhook');
     }
   });
 }
@@ -109,8 +109,10 @@ export function updateWebHookAccessToken(webHookId, accessToken) {
     },
     body: new URLSearchParams(formData).toString(),
   }).then(resp => {
-    if (!resp?.ok) {
-      throw new Error('Error when saving crowdin webhook');
+    if (resp && resp.ok) {
+      return resp.json;
+    } else {
+      throw new Error('Error when updating crowdin webhook access token');
     }
   });
 }
@@ -120,7 +122,9 @@ export function deleteCrowdinWebHook(projectId) {
     method: 'DELETE',
     credentials: 'include',
   }).then(resp => {
-    if (!resp?.ok) {
+    if (resp && resp.ok) {
+      return resp.json;
+    } else {
       throw new Error('Error when deleting crowdin webhook');
     }
   });
