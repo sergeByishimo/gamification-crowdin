@@ -76,7 +76,6 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
 
 
     // Retrieve who made that approval by calling Crowdin API
-    try {
       String translationId = extractSubItem(payload, TRANSLATION, ID);
       RemoteApproval remoteApproval = webhookService.getApproval(getProjectId(payload), translationId);
 
@@ -95,11 +94,7 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
 
       }
 
-    } catch (IllegalAccessException | ObjectNotFoundException e) {
-      LOG.error(e);
-    }
-
-    return eventList;
+      return eventList;
   }
 
   @Override
