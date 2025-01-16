@@ -34,7 +34,7 @@ public class Utils {
 
   public static final String   WEBHOOKS                           = "/webhooks/";
 
-  public static final String   APPROVALS                           = "/approvals/";
+  public static final String   APPROVALS                          = "/approvals/";
 
   public static final String   AUTHORIZED_TO_ACCESS_CROWDIN_HOOKS = "The user is not authorized to access crowdin Hooks";
 

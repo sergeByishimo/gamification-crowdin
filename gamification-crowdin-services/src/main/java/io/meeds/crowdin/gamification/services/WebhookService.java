@@ -57,16 +57,12 @@ public class WebhookService {
     return crowdinConsumerStorage.getProjects(accessToken);
   }
 
-  public RemoteApproval getApproval(String projectId, String translationId)
-          throws IllegalAccessException, ObjectNotFoundException {
-
+  public RemoteApproval getApproval(String projectId, String translationId) {
     WebHook webHook = webHookStorage.getWebhookByProjectId(Long.parseLong(projectId));
-
-    if (webHook == null) {
-      throw new ObjectNotFoundException("Webhook with project id '" + projectId + "' doesn't exist");
+    if (webHook != null) {
+      return crowdinConsumerStorage.getApproval(webHook.getToken(), projectId, translationId);
     }
-
-    return crowdinConsumerStorage.getApproval(webHook.getToken(), projectId, translationId);
+    return null;
   }
 
   public WebHook createWebhook(long projectId,

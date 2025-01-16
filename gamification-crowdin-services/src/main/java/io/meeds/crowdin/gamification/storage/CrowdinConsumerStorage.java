@@ -378,7 +378,7 @@ public class CrowdinConsumerStorage {
   }
 
   public RemoteApproval getApproval(String accessToken, String projectId, String translationId)
-          throws IllegalAccessException {
+             {
 
     try {
 
@@ -401,10 +401,9 @@ public class CrowdinConsumerStorage {
 
       return remoteApproval;
 
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException(e);
     } catch (CrowdinConnectionException e) {
-      throw new IllegalAccessException(TOKEN_EXPIRED_OR_INVALID);
+      LOG.warn("Unable to retrieve approval for crowdin translation with id {}.", translationId, e);
+      return null;
     }
   }
 

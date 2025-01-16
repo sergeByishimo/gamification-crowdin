@@ -78,7 +78,6 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
     // Retrieve who made that approval by calling Crowdin API
     try {
       String translationId = extractSubItem(payload, TRANSLATION, ID);
-
       RemoteApproval remoteApproval = webhookService.getApproval(getProjectId(payload), translationId);
 
       if (remoteApproval != null) {
