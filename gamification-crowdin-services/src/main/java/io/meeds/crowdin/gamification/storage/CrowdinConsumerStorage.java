@@ -377,11 +377,8 @@ public class CrowdinConsumerStorage {
     }
   }
 
-  public RemoteApproval getApproval(String accessToken, String projectId, String translationId)
-             {
-
+  public RemoteApproval getApproval(String accessToken, String projectId, String translationId) {
     try {
-
       URI uri = URI.create(CROWDIN_API_URL + PROJECTS + projectId + APPROVALS + translationId);
 
       String response = processGet(uri, accessToken);
@@ -400,7 +397,6 @@ public class CrowdinConsumerStorage {
       remoteApproval.setLanguageId(jsonObject.getString("languageId"));
 
       return remoteApproval;
-
     } catch (CrowdinConnectionException e) {
       LOG.warn("Unable to retrieve approval for crowdin translation with id {}.", translationId, e);
       return null;
