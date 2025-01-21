@@ -377,12 +377,11 @@ public class CrowdinConsumerStorage {
     }
   }
 
-  public RemoteApproval getApproval(
-          String accessToken, String projectId, String translationId) {
+  public RemoteApproval getApproval(String accessToken, String projectId,String translationId) {
 
     try {
 
-      URI uri = URI.create(CROWDIN_API_URL + PROJECTS + projectId + APPROVALS + "?translationId="+ translationId);
+      URI uri = URI.create(CROWDIN_API_URL + PROJECTS + projectId + APPROVALS + "?translationId=" + translationId);
 
       String response = processGet(uri, accessToken);
       JSONArray jsonArray = new JSONObject(response).getJSONArray("data");
