@@ -83,7 +83,7 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
                 remoteApproval.getUserName(),
                 remoteApproval.getUserName(),
                 objectId,
-                TRANSLATION,
+                APPROVAL,
                 getProjectId(payload),
                 extractSubItem(payload, TRANSLATION, TARGET_LANGUAGE, ID),
                 extractSubItem(payload, TRANSLATION, PROVIDER) == null,
@@ -97,7 +97,7 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
       // Retrieve who made that approval from the database
 
       List<RealizationDTO> realizations = realizationService.
-              findRealizationsByObjectIdAndObjectType(objectId, TRANSLATION);
+              findRealizationsByObjectIdAndObjectType(objectId, APPROVAL);
 
       if ( ! realizations.isEmpty()) {
         String approvalUsername = realizations.get(0).getEarnerId();
@@ -113,8 +113,6 @@ public class SuggestionApprovedTriggerPlugin extends CrowdinTriggerPlugin {
                 extractSubItem(payload, TRANSLATION, STRING, FILE, DIRECTORY_ID),
                 true,
                 countWords(extractSubItem(payload, TRANSLATION, STRING, TEXT))));
-      } else {
-        LOG.warn("No realization found while cancelling translation with id: " + objectId);
       }
 
     }
